@@ -1,7 +1,7 @@
 
 // openAI section
 
-var openaiApiKey = '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'
+var okey = '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'
 
 var el1 = $('.el1')
 var el2 = $('.el2')
@@ -37,7 +37,7 @@ function el2Function(lastResponse) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + openaiApiKey
+            'Authorization': 'Bearer ' + okey
         },
         body: JSON.stringify({
             model: 'gpt-3.5-turbo-1106',
@@ -71,7 +71,7 @@ function el3Function(storySoFar, lastResponse) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + openaiApiKey
+            'Authorization': 'Bearer ' + okey
         },
         body: JSON.stringify({
             model: 'gpt-3.5-turbo-1106',
