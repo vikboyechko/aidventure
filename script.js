@@ -1,7 +1,7 @@
 
 // openAI section
 
-var okey = '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'
+const okey = window.prompt("Enter your OpenAI api key");
 
 var el1 = $('.el1')
 var el2 = $('.el2')
