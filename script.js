@@ -1,8 +1,5 @@
 
 // openAI section
-
-const okey = window.prompt("Enter your OpenAI api key");
-
 var el1 = $('.el1')
 var el2 = $('.el2')
 var el3 = $('.el3')
@@ -12,24 +9,27 @@ var q3 = $('.q3')
 var a1 = $('#a1')
 var a2 = $('#a2')
 var a3 = $('#a3')
-var a1Response = a1.val();
+
 var submit1 = $('#submit1')
 var submit2 = $('#submit2')
 var submit3 = $('#submit2')
 
-
 el2.hide();
 el3.hide();
 
+const okey = window.prompt("Enter your OpenAI api key");
+
 submit1.on('click', function(event) {
   event.preventDefault();
+  var a1Response = a1.val();
   el1.hide();
+  console.log(a1Response)
   el2Function(a1Response);
 })
 
 
 function el2Function(lastResponse) {
-
+    console.log(lastResponse)
     var prompt = `Let's make second-person choose your own adventure story. Write a short creative story with a plot twist featuring a character who is ${lastResponse}. It should be about 50 words, and it's a second-person story so it should be about 'You'. Include paragraph breaks. End this part of the story with a question of what to do next.`;
 
 
