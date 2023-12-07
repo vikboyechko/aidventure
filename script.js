@@ -1,5 +1,6 @@
 
 // openAI section
+var el0 = $('.el0')
 var el1 = $('.el1')
 var el2 = $('.el2')
 var el3 = $('.el3')
@@ -9,23 +10,38 @@ var q3 = $('.q3')
 var a1 = $('#a1')
 var a2 = $('#a2')
 var a3 = $('#a3')
-
+var inputAPI = $('#inputAPI')
+var submitAPI = $('#submit-api')
 var submit1 = $('#submit1')
 var submit2 = $('#submit2')
 var submit3 = $('#submit2')
 
+el1.hide();
 el2.hide();
 el3.hide();
 
-const okey = window.prompt("Enter your OpenAI api key");
+var okey = ""
 
-submit1.on('click', function(event) {
-  event.preventDefault();
-  var a1Response = a1.val();
-  el1.hide();
-  console.log(a1Response)
-  el2Function(a1Response);
-})
+submitAPI.on('click', function(event) {
+    event.preventDefault();
+    okey = inputAPI.val();
+    el0.hide();
+    el1.show();
+    // return okey;
+    chooseAdventure();
+  })
+
+function chooseAdventure() {
+    submit1.on('click', function(event) {
+        event.preventDefault();
+        // el1.show();
+        var a1Response = a1.val();
+        el1.hide();
+        console.log(a1Response)
+        el2Function(a1Response);
+      })
+}
+
 
 
 function el2Function(lastResponse) {
