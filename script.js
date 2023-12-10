@@ -25,13 +25,40 @@ if (apiKey) {
     pageNextChapter.hide();
 }
 
-// Store API key on submission
+// Test API for validity, Store API key on submission
 submitAPI.click(function(event) {
     event.preventDefault();
     apiKey = inputAPI.val();
-    localStorage.setItem('apiKey', apiKey); // sets the API key in localStorage
-    pageAPI.hide(); // hides the form
-    pageStartAdventure.show(); // shows the story start question
+
+    var prompt = 'Test';
+
+    fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + apiKey
+        },
+        body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [{role: "system", content: prompt}],
+            max_tokens: 25
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // API key is valid
+            localStorage.setItem('apiKey', apiKey); // sets the API key in localStorage
+            pageAPI.hide(); // hides the form
+            pageStartAdventure.show(); // shows the story start question
+        } else {
+            $('<p style="color:red">API Key is not valid. Please try again.</p>').appendTo(pageAPI);
+            inputAPI.val('');
+        }
+    })
+   .catch(error => {
+        console.error('Error:', error);
+        $('<p style="color:red">Something went wrong, please try again</p>').appendTo(pageAPI);
+   });
 });
 
 // Handle the start of the adventure
@@ -73,7 +100,7 @@ function generateStory(userResponse, isNextChapter) {
     .then(response => response.json())
     .then(data => {
         var storyText = data.choices[0].message.content.trim(); // this is where the response is stored in data
-        gptText.text(storyText); // show the response text in the gptText element
+        typeWriter(storyText); // show the response text in the gptText element
         pageNextChapter.show(); // show the text on the page
         generateImage(storyText); // generate the dall-e image function
     });
@@ -93,7 +120,7 @@ function generateStory(userResponse, isNextChapter) {
         },
         body: JSON.stringify({
             model: 'dall-e-3',
-            prompt: storyText,
+            prompt: (storyText + "Don't have text in the image. I NEED to test how the tool works with extremely simple prompts. DO NOT add any detail, just use it AS-IS:"),
             n: 1, // how many images to generate
             size: '1024x1024' // the size of the image, i wonder if a smaller size takes less tokens?
         })
@@ -111,5 +138,18 @@ function generateStory(userResponse, isNextChapter) {
     });
 }
 
+function typeWriter(text) {
+    var words = text.split(' '); // Splits the gpt response into individual words
+    var i = 0;
+    gptText.empty(); // clears any existing content
 
+    function addWord() {
+        if (i < words.length) {
+            gptText.append(words[i] + ' '); // Add the next word
+            i++;
+            setTimeout(addWord, 200) // let's try 200 milliseconds
+        }
+    }
+    addWord(); // calls the function to start
+}
 
