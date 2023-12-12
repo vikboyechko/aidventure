@@ -1,0 +1,159 @@
+/* The official Choose Your Own Adventure font */
+@font-face {
+  font-family: 'Choose';
+  src: url('choose.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-image: url('background.jpg');
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 1500px;
+
+}
+
+main {
+  margin-top: 5%;
+}
+
+h1 {
+  font-family:'Choose', serif;
+  text-transform: uppercase;
+  margin: 50px 20px;
+  padding: 20px 5px 10px 5px;
+  color: white;
+  font-size: 3rem;
+  background-color: #f23c2e;
+  border-radius: 40px;
+  text-align: center;
+}
+
+p {
+  font-size: 1.8rem;
+  color: rgb(78, 61, 200);
+  margin-bottom: 25px;
+}
+
+.form-control::placeholder {
+  font-style: italic;
+}
+
+label {
+  font-weight: 600;
+}
+
+.dalle-image-generation {
+  width: 75%;
+}
+
+/* .adventure-border {
+  display: inline-flex;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+} */
+
+img {
+  display: block;
+  width: 75%;
+  padding: 10px; 
+  background-color: #f4d442; 
+  border: 5px solid #804000;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+}
+
+.container {
+  margin-top: 1rem;
+}
+
+/* loading spinner for the image */
+.loading-spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin:50px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* button formatting */
+.btn {
+  margin-top: 1rem;
+  background-color: red;
+  border: none;
+  text-align: center;
+  color: white;
+}
+
+.API-btn {
+  width: 5rem;
+  text-align: center;
+}
+
+/* Enter API formatting */
+.page-api {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.password {
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+}
+
+/* Start adventure formatting */
+.page-start-adventure {
+  display: flex;
+  width: 120%;
+  justify-content: center;
+  text-align: center;
+  flex-direction: row;
+}
+
+#page-start-adventure-input {
+  width: 100%;
+}
+
+/* Continue adventure formatting */
+.page-next-chapter div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gpt-text-generation {
+  margin-top: 1rem;
+  width: 75%;
+  color: rgb(127, 33, 33);
+  font-weight: 600;
+  font-family: 'choose';
+  margin-bottom: 50px;
+}
+
+.q2 {
+  margin-top: 5rem;
+}
+
+#page-next-chapter-input {
+  width:100%;
+}
+
+#page-next-chapter-input + .btn {
+margin-left: 35%; /* couldn't figure out how else to center the damn button
+margin-top: -15px;
+}

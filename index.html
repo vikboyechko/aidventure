@@ -4,50 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./develop/css/normalize.css">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="./develop/css/skeleton.css">
+    <link rel="stylesheet" href="./develop/css/style.css" />    
     <title>Choose Your Own AI-venture</title>
 </head>
 <body>
 <main>
-  <h1 class="text-center mb-5">Choose Your Own AI-venture</h1>
+    <h1 class="text-center">Choose Your Own AIventure</h1>
     <!-- Ask for OpenAI API key since we can't expose one in code -->
-    <section class="container page-api mt-5">
+    <section class="container page-api">
       <label for="inputAPI">Please provide an OpenAI API key</label>
-      <input type="password" id="inputAPI" class="my-3 form-control">
-      <button type="submit" id="submit-api" class="btn btn-primary">Go</button>
+      <input type="password" id="inputAPI" class="form-control">
+      <button type="submit" id="submit-api" class="btn btn-primary API-btn">Go</button>
     </section>
 
     <!-- ... Start adventure ... -->
-    <section class="container page-start-adventure mt-5">
-      <div class="w-100 row justify-content-center text-center">
-        <p>Describe how your adventure begins.</p>
-          <form id="form-start-adventure" class="w-50">
+    <section class="container page-start-adventure">
+        <div id="page-start-div">
+        <p style="font-weight: bold">Describe how your adventure begins.</p>
+          <form id="form-start-adventure">
             <textarea class="form-control" id="page-start-adventure-input" placeholder="Example: You are alone on a desert island.."></textarea>
-            <button type="submit" class="btn btn-primary mt-3">Go</button>
+            <button type="submit" class="btn btn-primary">Go</button>
           </form>
       </div>
     </section>
 
     <!-- Each Subsequent Page of the Adventure -->
-    <section class="container page-next-chapter mt-5">
-      <div class="d-flex flex-column align-items-center">
-        <p class = "mt-5 w-75 gpt-text-generation"> </p>
+    <section class="container page-next-chapter">
+      <div>
+        <p class = "gpt-text-generation"> </p>
         <div class="loading-spinner"></div>
-        <img class = "mt-5 dalle-image-generation">
-        <p class = "mt-5 q2">What do you want to do next?</p>
-        <div class="w-100 row justify-content-center text-center">
-          <form id="form-next-chapter" class="w-50 justify-content-center">
-            <textarea class="form-control " id="page-next-chapter-input"></textarea>
-            <button type="submit" class="btn btn-primary mt-3 mb-5 mw-50">Go</button>    
+        <img class = "dalle-image-generation">
+        <p class = "q2" style="font-weight: bold">What do you want to do next?</p>
+          <form id="form-next-chapter">
+            <textarea class="form-control" id="page-next-chapter-input"></textarea>
+            <button type="submit" class="btn btn-primary">Go</button>    
           </form>
-        </div>
       </div>
     </section>
 
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="script.js"></script>
+<script src="./develop/js/script.js"></script>
 </body>
 </html>

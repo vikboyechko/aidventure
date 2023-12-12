@@ -30,7 +30,7 @@ submitAPI.click(function(event) {
     event.preventDefault();
     apiKey = inputAPI.val();
 
-    var prompt = 'Test';
+    var prompt = 'Test'; // Dummy prompt to ensure API key is working
 
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -46,18 +46,18 @@ submitAPI.click(function(event) {
     })
     .then(response => {
         if (response.ok) {
-            // API key is valid
+            // API key is valid, go ahead and set it to local storage
             localStorage.setItem('apiKey', apiKey); // sets the API key in localStorage
             pageAPI.hide(); // hides the form
             pageStartAdventure.show(); // shows the story start question
         } else {
-            $('<p style="color:red">API Key is not valid. Please try again.</p>').appendTo(pageAPI);
-            inputAPI.val('');
+            $('<p style="color:red">API Key is not valid. Please try again.</p>').appendTo(pageAPI); // shows error message, might need to style later
+            inputAPI.val(''); // clears the API input form field
         }
     })
    .catch(error => {
         console.error('Error:', error);
-        $('<p style="color:red">Something went wrong, please try again</p>').appendTo(pageAPI);
+        $('<p style="color:red">Something went wrong, please try again</p>').appendTo(pageAPI); // in case something else goes wrong during submission
    });
 });
 
@@ -120,7 +120,7 @@ function generateStory(userResponse, isNextChapter) {
         },
         body: JSON.stringify({
             model: 'dall-e-3',
-            prompt: (storyText + "Don't have text in the image. I NEED to test how the tool works with extremely simple prompts. DO NOT add any detail, just use it AS-IS:"),
+            prompt: storyText,
             n: 1, // how many images to generate
             size: '1024x1024' // the size of the image, i wonder if a smaller size takes less tokens?
         })
