@@ -1,18 +1,26 @@
 /* The official Choose Your Own Adventure font */
 @font-face {
   font-family: 'Choose';
-  src: url('choose.otf') format('opentype');
+  src: url('../fonts/choose.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
+/* book background for wide screens */
 body {
-  background-image: url('background.jpg');
-  background-position: center;
-  background-size: 100% 100%;
+  background-image: url('../images/background-wide.jpg');
+  background-position: center center;
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 1500px;
+  background-attachment: fixed;
+  max-height: 100vh;
+  margin: 0;
+}
 
+/* hide scrollbar */
+body,
+html {
+  overflow: hidden; 
 }
 
 main {
@@ -22,7 +30,8 @@ main {
 h1 {
   font-family:'Choose', serif;
   text-transform: uppercase;
-  margin: 50px 20px;
+  margin: 50px auto;
+  max-width: 600px;
   padding: 20px 5px 10px 5px;
   color: white;
   font-size: 3rem;
@@ -37,57 +46,8 @@ p {
   margin-bottom: 25px;
 }
 
-.form-control::placeholder {
-  font-style: italic;
-}
-
 label {
   font-weight: 600;
-}
-
-.dalle-image-generation {
-  width: 75%;
-}
-
-/* .adventure-border {
-  display: inline-flex;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-} */
-
-img {
-  display: block;
-  width: 75%;
-  padding: 10px; 
-  background-color: #f4d442; 
-  border: 5px solid #804000;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-}
-
-.container {
-  margin-top: 1rem;
-}
-
-/* loading spinner for the image */
-.loading-spinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
-  margin:50px auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /* button formatting */
@@ -99,61 +59,471 @@ img {
   color: white;
 }
 
+/* API page formatting */
 .API-btn {
   width: 5rem;
   text-align: center;
+  padding: 0;
 }
 
-/* Enter API formatting */
+.API-btn:hover {
+  background-color:rgb(78, 61, 200);
+  color: white;
+}
+
 .page-api {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  margin: 0 15%;
 }
 
-.password {
+#inputAPI {
   margin-top: .75rem;
   margin-bottom: .75rem;
+  width: 75%;
 }
 
-/* Start adventure formatting */
-.page-start-adventure {
-  display: flex;
-  width: 120%;
-  justify-content: center;
-  text-align: center;
-  flex-direction: row;
+/* User preferences page */
+.user-preferences {
+  display: grid;
+  grid-template-columns: 5% 1fr 1fr 5%;
+  row-gap: 5px;
+  column-gap: 150px;
+  align-items: center;
+  font-family: 'choose', serif;
+}
+
+label[for="inputName"],
+#inputName {
+  grid-column-start: 2;
+}
+
+#inputName {
+  grid-column-start: 2;
+  font-family: sans-serif;
+  color: #999;
+}
+
+#inputName::placeholder {
+  font-family: sans-serif;
+  color: #999;
+}
+
+label[for="inputJob"],
+#inputJob {
+  grid-column-start: 2;
+}
+
+#inputJob {
+  grid-column-start: 2;
+  font-family: sans-serif;
+  color: #999;
+}
+
+label[for="inputGenre"],
+#inputGenre {
+  grid-column-start: 2;
+}
+
+#inputGenre {
+  grid-column-start: 2;
+  font-family: sans-serif;
+  color: #999;
+}
+
+label[for="inputSetting"] {
+  grid-column-start: 3;
+  grid-row-start: 1;
+}
+
+#inputSetting {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  font-family: sans-serif;
+  color: #999;
+}
+
+label[for="inputLength"] {
+  grid-column-start: 3;
+  grid-row-start: 3;
+}
+
+#inputLength {
+  grid-column-start: 3;
+  grid-row-start: 4;
+  font-family: sans-serif;
+  color: #999;
+}
+
+#submit-preferences {
+  margin-top: -5px;
+  font-size: 1.5rem;
+  border-radius: 40px;
+  padding-top: 2px;
+}
+#submit-preferences:hover {
+  background-color:rgb(255, 55, 55);
+  color: white;
 }
 
 #page-start-adventure-input {
   width: 100%;
 }
 
-/* Continue adventure formatting */
-.page-next-chapter div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 'Your adventure begins...' */
+#page-start-div h5 {
+  color: brown;
+  font-family: 'choice', serif;
 }
 
-.gpt-text-generation {
+/* the main results grid on wide screen */
+.page-start-adventure,
+.page-next-chapter,
+.page-end-of-story {
   margin-top: 1rem;
-  width: 75%;
+  max-width: 90%; /* Max width to fit inside the background book image */
+  margin: auto; 
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr 4fr 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+}
+
+#page-start-div,
+#page-continue-div {
+  grid-column: 2;
+}
+
+/* the story text */
+.gpt-text-generation {
+  margin-top: 2rem;
+  width: 100%;
+  font-size:large;
   color: rgb(127, 33, 33);
   font-weight: 600;
   font-family: 'choose';
   margin-bottom: 50px;
 }
 
-.q2 {
-  margin-top: 5rem;
+/* loading spinner for the image */
+.loading-spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin:50px auto;
+  grid-column: 4;
+  grid-row: 1;
+  align-self: center;
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* image container */
+.dalle-image-generation {
+  grid-column: 4;
+  grid-row: 1;
+  justify-self: center;
+}
+
+/* custom border look for the generated image */
+img {
+  display: block;
+  width: 90%;
+  padding: 10px; 
+  background-color: #f4d442; 
+  border: 5px solid #804000;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  transition: opacity 1s ease-in;
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+#form-next-chapter {
+  width: 100%;
+  text-align: center;
+  justify-self: center;
+}
+
+/* Story continuation elements */
+.gpt-text-generation,
+#form-first-chapter {
+  grid-column: 2; 
+  justify-self: start;
+}
+
+.story-continue-questions {
+  display: grid;
+  justify-items: center;
+}
+
+/* 'What do you want to do next?' */
+.q2 {
+  grid-column: 1; 
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
 
 #page-next-chapter-input {
-  width:100%;
+  width: 280px;
 }
 
-#page-next-chapter-input + .btn {
-margin-left: 35%; /* couldn't figure out how else to center the damn button
-margin-top: -15px;
+.hidden {
+  display: none;
+}
+
+/* story continuation choices */
+.user-selection {
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+  }
+  
+  .choice-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 1.4rem;
+    white-space: normal; /* Allow the text to wrap if it's long */
+    line-height: 1.2;
+  }
+
+.choice-button:hover {
+  background-color: red;
+  color: white;
+}
+  
+/* Show/hide choice form button */
+/* Should be only text, minimal, partial transparency */
+.show-form {
+  background-color: transparent;
+  border: none;
+  color: rgb(78, 61, 200);
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+  font-size: smaller;
+}
+
+/* action items to show at end of story */
+#save-share-startover {
+  justify-self: center;
+  text-align: center;
+}
+
+#save-story {
+  margin-right: 25px;
+  text-align: center;
+  background-color: green;
+  display:none;
+}
+
+#share-story {
+  text-align: center;
+  background-color: rgb(78, 61, 200);
+  display:none;
+}
+
+#startover-story {
+  margin-left: 25px;
+  background-color: #f4d442;
+  color: brown;
+  border: 1px solid brown;
+}
+
+#save-story:hover,
+#share-story:hover,
+#startover-story:hover {
+  background-color: red;
+}
+
+#startover-story:hover {
+  color: white;
+}
+
+/* Custom Scrollbar for Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #003366; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #002244; 
+}
+
+
+/* Media query for narrower screen */
+@media screen and (max-width: 1400px) {
+
+  /* single page background image */
+  body {
+    background-image: url('../images/background-narrow.jpg');
+  }
+
+  /* show scrollbar */
+  body,
+  html {
+    overflow: visible; 
+  }
+
+  .page-start-adventure,
+  .page-next-chapter {
+    grid-template-columns: 1fr 5fr 1fr;
+  }
+  
+  .dalle-image-generation,
+  .loading-spinner {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+  }
+
+  img {
+    width: 70%;
+  }
+
+  .user-preferences {
+    grid-template-columns: 5% 1fr 5%;
+    row-gap: 5px;
+    margin-top: 10%;
+  }
+
+  label[for="inputSetting"] {
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
+
+  #inputSetting {
+    grid-column-start: 2;
+    grid-row-start: 2;
+  }
+
+  label[for="inputLength"] {
+    grid-column-start: 2;
+    grid-row-start: 3;
+  }
+
+  #inputLength {
+    grid-column-start: 2;
+    grid-row-start: 4;
+  }
+
+  #submit-preferences {
+    grid-column-start: 2;
+    grid-row-start: 15;
+  }
+
+}
+
+@media screen and (max-width: 560px) {
+  .user-preferences {
+    grid-template-columns: 1px 1fr 5%;
+  }
+
+}
+
+/* API reset button */
+/* Should be barely visible */
+.reset-api {
+  background-color: transparent;
+  border: none;
+  color: rgb(78, 61, 200);
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  opacity: 0.5;
+  font-size: smaller;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.dropdown {
+  background-color: #f0f0f0; 
+  color: #333; 
+  padding: 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 16px; 
+  -webkit-appearance: none; /* Removes default arrow for Webkit browsers */
+  -moz-appearance: none; /* Removes default arrow for Mozilla browsers */
+  background-image: linear-gradient(45deg, transparent 50%, #333 50%), linear-gradient(-45deg, transparent 50%, #333 50%);
+  background-position: right 15px center, right 10px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* For Internet Explorer */
+.dropdown::-ms-expand {
+  display: none;
+}
+
+.dropdown:focus {
+  outline: none; 
+  border-color: #666; 
+}
+
+.dropdown:hover {
+  background-color: #e9e9e9; 
+}
+.dropdown:active {
+  background-color: #ddd; 
+}
+
+#inputName {
+  background-color: #f0f0f0; 
+  color: #333; 
+  padding: 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 16px; 
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+#inputName:focus {
+  outline: none; 
+  border-color: #666; 
+}
+
+#inputName:hover {
+  background-color: #e9e9e9; 
+}
+
+#inputName:active, #inputName:focus {
+  background-color: #ddd; 
 }
